@@ -51,6 +51,53 @@ namespace FakeNamespace
     }
 }
 ";
+
+            public const string EmployeeClass =
+                @"using System;
+using System.Collections.Generic;
+
+namespace FakeNamespace
+{
+    public partial class Employee
+    {
+        public Employee()
+        {
+            Territories = new HashSet<Territory>();
+        }
+
+        public int EmployeeId { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public DateTime? HireDate { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+
+        public virtual ICollection<Territory> Territories { get; set; }
+    }
+}
+";
+
+            public const string TerritoryClass =
+                @"using System;
+using System.Collections.Generic;
+
+namespace FakeNamespace
+{
+    public partial class Territory
+    {
+        public Territory()
+        {
+            Employees = new HashSet<Employee>();
+        }
+
+        public string TerritoryId { get; set; }
+        public string TerritoryDescription { get; set; }
+
+        public virtual ICollection<Employee> Employees { get; set; }
+    }
+}
+";
         }
 
         private static class ExpectedEntitiesWithTransformMappings
@@ -223,6 +270,78 @@ namespace FakeNamespace
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty(""Products"")]
         public virtual Category Category { get; set; }
+    }
+}
+";
+
+            public const string EmployeeClass =
+                @"using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+namespace FakeNamespace
+{
+    [Table(""Employee"")]
+    public partial class Employee
+    {
+        public Employee()
+        {
+            Territories = new HashSet<Territory>();
+        }
+
+        [Key]
+        public int EmployeeId { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string LastName { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string FirstName { get; set; }
+        [Column(TypeName = ""datetime"")]
+        public DateTime? BirthDate { get; set; }
+        [Column(TypeName = ""datetime"")]
+        public DateTime? HireDate { get; set; }
+        [StringLength(15)]
+        public string City { get; set; }
+        [StringLength(15)]
+        public string Country { get; set; }
+
+        [ForeignKey(nameof(EmployeeId))]
+        [InverseProperty(nameof(Territory.Employees))]
+        public virtual ICollection<Territory> Territories { get; set; }
+    }
+}
+";
+            
+            public const string TerritoryClass =
+                @"using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+namespace FakeNamespace
+{
+    [Table(""Territory"")]
+    public partial class Territory
+    {
+        public Territory()
+        {
+            Employees = new HashSet<Employee>();
+        }
+
+        [Key]
+        [StringLength(20)]
+        public string TerritoryId { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string TerritoryDescription { get; set; }
+
+        [ForeignKey(nameof(TerritoryId))]
+        [InverseProperty(nameof(Employee.Territories))]
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
 ";

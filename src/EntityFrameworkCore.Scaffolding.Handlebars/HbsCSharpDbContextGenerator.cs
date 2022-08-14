@@ -917,7 +917,10 @@ namespace EntityFrameworkCore.Scaffolding.Handlebars
                             foreach (var property in joinEntityType.GetProperties())
                             {
                                 lines.Add(
-                                    $"j.{nameof(EntityTypeBuilder.IndexerProperty)}<{CSharpHelper.Reference(property.ClrType)}>({CSharpHelper.Literal(property.Name)})");
+                                          $"j.{nameof(EntityTypeBuilder.IndexerProperty)}<{CSharpHelper.Reference(property.ClrType)}>({CSharpHelper.Literal(property.Name)})");
+                                // var joinPropertyType = EntityTypeTransformationService.TransformPropertyType(joinEntityType, property.Name, property.DeclaringType.Name);
+                                // lines.Add(
+                                //     $"j.{nameof(EntityTypeBuilder.IndexerProperty)}<{joinPropertyType}>({CSharpHelper.Literal(property.Name)})");
 
                                 var propertyAnnotations = AnnotationCodeGenerator
                                     .FilterIgnoredAnnotations(property.GetAnnotations())

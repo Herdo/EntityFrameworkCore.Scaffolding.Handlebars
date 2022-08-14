@@ -166,12 +166,21 @@ namespace Scaffolding.Handlebars.Tests
             var files = GetGeneratedFiles(model, options);
             var category = files[Constants.Files.TypeScriptFiles.CategoryFile];
             var product = files[Constants.Files.TypeScriptFiles.ProductFile];
+            var employee = files[Constants.Files.TypeScriptFiles.EmployeeFile];
+            var employeeTerritory = files[Constants.Files.TypeScriptFiles.EmployeeTerritoryFile];
+            var territory = files[Constants.Files.TypeScriptFiles.TerritoryFile];
 
             object expectedCategory = ExpectedEntities.CategoryClass;
             object expectedProduct = ExpectedEntities.ProductClass;
+            object expectedEmployee = ExpectedEntities.EmployeeClass;
+            object expectedEmployeeTerritory = ExpectedEntities.EmployeeTerritoryClass;
+            object expectedTerritory = ExpectedEntities.TerritoryClass;
 
             Assert.Equal(expectedCategory, category);
             Assert.Equal(expectedProduct, product);
+            Assert.Equal(expectedEmployee, employee);
+            Assert.Equal(expectedEmployeeTerritory, employeeTerritory);
+            Assert.Equal(expectedTerritory, territory);
         }
 
         [Fact]
@@ -203,14 +212,23 @@ namespace Scaffolding.Handlebars.Tests
             object expectedContext = ExpectedContexts.ContextClass;
             object expectedCategory = ExpectedEntities.CategoryClass;
             object expectedProduct = ExpectedEntities.ProductClass;
+            object expectedEmployee = ExpectedEntities.EmployeeClass;
+            object expectedEmployeeTerritory = ExpectedEntities.EmployeeTerritoryClass;
+            object expectedTerritory = ExpectedEntities.TerritoryClass;
 
             var context = files[Constants.Files.TypeScriptFiles.DbContextFile];
             var category = files[Constants.Files.TypeScriptFiles.CategoryFile];
             var product = files[Constants.Files.TypeScriptFiles.ProductFile];
+            var employee = files[Constants.Files.TypeScriptFiles.EmployeeFile];
+            var employeeTerritory = files[Constants.Files.TypeScriptFiles.EmployeeTerritoryFile];
+            var territory = files[Constants.Files.TypeScriptFiles.TerritoryFile];
 
             Assert.Equal(expectedContext, context);
             Assert.Equal(expectedCategory, category);
             Assert.Equal(expectedProduct, product);
+            Assert.Equal(expectedEmployee, employee);
+            Assert.Equal(expectedEmployeeTerritory, employeeTerritory);
+            Assert.Equal(expectedTerritory, territory);
         }
 
         [Fact]
@@ -242,9 +260,13 @@ namespace Scaffolding.Handlebars.Tests
             var expectedContextPath = Path.Combine(directory.Path, "Contexts", Constants.Files.TypeScriptFiles.DbContextFile);
             var expectedCategoryPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.CategoryFile);
             var expectedProductPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.ProductFile);
+            var expectedEmployeePath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.EmployeeFile);
+            var expectedTerritoryPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.TerritoryFile);
             Assert.Equal(expectedContextPath, result.ContextFile);
             Assert.False(File.Exists(expectedCategoryPath));
             Assert.False(File.Exists(expectedProductPath));
+            Assert.False(File.Exists(expectedEmployeePath));
+            Assert.False(File.Exists(expectedTerritoryPath));
         }
 
         [Fact]
@@ -277,9 +299,15 @@ namespace Scaffolding.Handlebars.Tests
             var expectedCategoryPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.CategoryFile);
             var expectedCustomerPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.CustomerFile);
             var expectedProductPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.ProductFile);
+            var expectedEmployeePath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.EmployeeFile);
+            var expectedEmployeeTerritoryPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.EmployeeTerritoryFile);
+            var expectedTerritoryPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.TerritoryFile);
             Assert.Equal(expectedCategoryPath, result.AdditionalFiles[0]);
             Assert.Equal(expectedCustomerPath, result.AdditionalFiles[1]);
-            Assert.Equal(expectedProductPath, result.AdditionalFiles[2]);
+            Assert.Equal(expectedEmployeePath, result.AdditionalFiles[2]);
+            Assert.Equal(expectedEmployeeTerritoryPath, result.AdditionalFiles[3]);
+            Assert.Equal(expectedProductPath, result.AdditionalFiles[4]);
+            Assert.Equal(expectedTerritoryPath, result.AdditionalFiles[5]);
             Assert.False(File.Exists(expectedContextPath));
         }
 
@@ -313,11 +341,17 @@ namespace Scaffolding.Handlebars.Tests
             var expectedContextPath = Path.Combine(directory.Path, "Contexts", $"{filenamePrefix}{Constants.Files.TypeScriptFiles.DbContextFile}");
             var expectedCategoryPath = Path.Combine(directory.Path, "Models", $"{filenamePrefix}{Constants.Files.TypeScriptFiles.CategoryFile}");
             var expectedCustomerPath = Path.Combine(directory.Path, "Models", $"{filenamePrefix}{Constants.Files.TypeScriptFiles.CustomerFile}");
-            var expectedProductPath = Path.Combine(directory.Path, "Models", $"{filenamePrefix}{ Constants.Files.TypeScriptFiles.ProductFile}");
+            var expectedProductPath = Path.Combine(directory.Path, "Models", $"{filenamePrefix}{Constants.Files.TypeScriptFiles.ProductFile}");
+            var expectedEmployeePath = Path.Combine(directory.Path, "Models", $"{filenamePrefix}{Constants.Files.TypeScriptFiles.EmployeeFile}");
+            var expectedEmployeeTerritoryPath = Path.Combine(directory.Path, "Models", $"{filenamePrefix}{Constants.Files.TypeScriptFiles.EmployeeTerritoryFile}");
+            var expectedTerritoryPath = Path.Combine(directory.Path, "Models", $"{filenamePrefix}{Constants.Files.TypeScriptFiles.TerritoryFile}");
             Assert.Equal(expectedContextPath, result.ContextFile);
             Assert.Equal(expectedCategoryPath, result.AdditionalFiles[0]);
             Assert.Equal(expectedCustomerPath, result.AdditionalFiles[1]);
-            Assert.Equal(expectedProductPath, result.AdditionalFiles[2]);
+            Assert.Equal(expectedEmployeePath, result.AdditionalFiles[2]);
+            Assert.Equal(expectedEmployeeTerritoryPath, result.AdditionalFiles[3]);
+            Assert.Equal(expectedProductPath, result.AdditionalFiles[4]);
+            Assert.Equal(expectedTerritoryPath, result.AdditionalFiles[5]);
         }
 
         [Fact]
@@ -350,10 +384,16 @@ namespace Scaffolding.Handlebars.Tests
             var expectedCategoryPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.CategoryFile);
             var expectedCustomerPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.CustomerFile);
             var expectedProductPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.ProductFile);
+            var expectedEmployeePath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.EmployeeFile);
+            var expectedEmployeeTerritoryPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.EmployeeTerritoryFile);
+            var expectedTerritoryPath = Path.Combine(directory.Path, "Models", Constants.Files.TypeScriptFiles.TerritoryFile);
             Assert.Equal(expectedContextPath, result.ContextFile);
             Assert.Equal(expectedCategoryPath, result.AdditionalFiles[0]);
             Assert.Equal(expectedCustomerPath, result.AdditionalFiles[1]);
-            Assert.Equal(expectedProductPath, result.AdditionalFiles[2]);
+            Assert.Equal(expectedEmployeePath, result.AdditionalFiles[2]);
+            Assert.Equal(expectedEmployeeTerritoryPath, result.AdditionalFiles[3]);
+            Assert.Equal(expectedProductPath, result.AdditionalFiles[4]);
+            Assert.Equal(expectedTerritoryPath, result.AdditionalFiles[5]);
         }
 
         private IReverseEngineerScaffolder CreateScaffolder(ReverseEngineerOptions options, string filenamePrefix = null)
@@ -444,7 +484,10 @@ namespace Scaffolding.Handlebars.Tests
             {
                 generatedFiles.Add(Constants.Files.TypeScriptFiles.CategoryFile, model.AdditionalFiles[0].Code);
                 generatedFiles.Add(Constants.Files.TypeScriptFiles.CustomerFile, model.AdditionalFiles[1].Code);
-                generatedFiles.Add(Constants.Files.TypeScriptFiles.ProductFile, model.AdditionalFiles[2].Code);
+                generatedFiles.Add(Constants.Files.TypeScriptFiles.EmployeeFile, model.AdditionalFiles[2].Code);
+                generatedFiles.Add(Constants.Files.TypeScriptFiles.EmployeeTerritoryFile, model.AdditionalFiles[3].Code);
+                generatedFiles.Add(Constants.Files.TypeScriptFiles.ProductFile, model.AdditionalFiles[4].Code);
+                generatedFiles.Add(Constants.Files.TypeScriptFiles.TerritoryFile, model.AdditionalFiles[5].Code);
             }
 
             return generatedFiles;

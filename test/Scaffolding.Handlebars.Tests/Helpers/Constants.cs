@@ -50,6 +50,8 @@
                 public const string CategoryFile = "Category.cs";
                 public const string CustomerFile = "Customer.cs";
                 public const string ProductFile = "Product.cs";
+                public const string EmployeeFile = "Employee.cs";
+                public const string TerritoryFile = "Territory.cs";
             }
             public static class TypeScriptFiles
             {
@@ -57,6 +59,9 @@
                 public const string CategoryFile = "Category.ts";
                 public const string CustomerFile = "Customer.ts";
                 public const string ProductFile = "Product.ts";
+                public const string EmployeeFile = "Employee.ts";
+                public const string EmployeeTerritoryFile = "EmployeeTerritory.ts";
+                public const string TerritoryFile = "Territory.ts";
             }
         }
     }
